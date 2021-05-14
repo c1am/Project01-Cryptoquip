@@ -1,44 +1,66 @@
 var addBtnEl = document.getElementById("addBtn")
 var nameInputEl = document.getElementById("coinInput")
+var cryptoArray = [];
 
 function handleAdd(event) {
-    var cryptoArray = [];
     var cryptocurrency = nameInputEl.value.trim();
-    console.log(cryptocurrency);
 
     event.preventDefault();
 
-    checkCoinName(cryptocurrency);
-
-    if (coinNameStatus = true) {
-        cryptoArray
+    // Validation
+    if (cryptocurrency) {
+        getCoin(cryptocurrency)
+        .then (function(coinData) {
+            if (coinData) {
+                
+                // localStorage.setItem(cryptocurrency, JSON.stringify(cryptoArray))
+                console.log(coinData)
+            }
+        })
     }
 };
 
-function checkCoinName(coinName) {
+/* async method of the Add to Watchlist button function
+async function handleAdd(event) {
+    var cryptoArray = [];
+    var cryptocurrency = nameInputEl.value.trim();
+
+    event.preventDefault();
+
+    // Validation
+    if (cryptocurrency) {
+        var coinStatus = await checkCoinName(cryptocurrency)
+        console.log(coinStatus)
+
+    if (coinNameStatus = true) {
+        cryptoArray 
+    }
+};
+*/
+
+function getCoin(coinName) {
     var id = coinName
-    var coinNameStatus = false
     var apiUrl = 'https://api.coingecko.com/api/v3/coins/' + coinName ;
 
-    fetch (apiUrl)
-        .then((response) => {
-            if (response.ok) {
-                console.log(response);
-                return response.json();
-            } else {
-                alert('Error: ' + response.statusText);
-            };
+    return new Promise(function(resolve, reject) {
+        fetch (apiUrl)
+        .then ((response) => {
+            return response.json();
+        })
 
+        .then (function(data) {
             if (coinName = data.name) {
-                return coinNameStatus = true;
+                resolve(data);
             } else {
-                alert("Can't find this cryptocurrency!");
+                resolve(false);
             };
         })
 
         .catch(function (error) {
-            alert('Unable to connect to the API.');
+            reject(error);
         });
+    })
+
 };
   
 
