@@ -12,9 +12,29 @@ function handleAdd(event) {
         getCoin(cryptocurrency)
         .then (function(coinData) {
             if (coinData) {
-                
                 // localStorage.setItem(cryptocurrency, JSON.stringify(cryptoArray))
                 console.log(coinData)
+                // coinData.name
+                
+                // coinData.block_time_in_minutes
+
+                // coinData.coingecko_score
+
+                // coinData.community_data.facebook_likes ; community_data.twitter_followers ; community_data.reddit_average_comments_48h 
+
+                // coinData.description.en
+
+                // coinData.genesis_date
+
+                // coinData.image.large
+
+                // coinData.market_data.current_price.usd
+
+                // coinData.market_data.market_cap.usd
+
+                // coinData.market_data.price_change_percentage_30d
+
+
             }
         })
     }
