@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/landingPageStyle.css">
+    <link rel="stylesheet" href="landingPageStyle.css">
     <title>Cryptoquip</title>
 </head>
 
@@ -27,7 +27,25 @@
             
         </div>
     </main>
-    
+
+    <h3>Top Moving Crypto</h3>
+    <form>
+     <label>Choose a crypto to buy:</label>
+       <select id="select" onchange={calcCrypto()}>
+       </select>
+       <br><br>
+       Amount to add in USD: <input type=number placeholder="Amount to add in USD" id="amountUSD" onkeypress={calcCrypto()}>
+       <br><br>
+ <!--        
+       Cryptocurrency amount: <font color="#555555" id="amountToHolding"></font> 
+ -->
+       Cryptocurrency amount: <label  id="amountToHolding"></label>
+       <br><br>
+       <input type="button" value="Add to portfolio" id=submitSelection onClick={addToPortfolio()}>
+     </form>
+       <table id="crypto"></table>
+    <script src="./Toplist/script.js"></script>
     <script src="./navLandingPage.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </body>
 </html>
