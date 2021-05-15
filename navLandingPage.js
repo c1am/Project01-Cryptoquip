@@ -3,6 +3,13 @@ var displayEl = document.getElementById("display")
 var nameInputEl = document.getElementById("coinInput")
 var cryptoArray = [];
 
+// formats the API currency data into the right punctuation/syntax
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+})
+
+// add to watchlist button
 function handleAdd(event) {
     var cryptocurrency = nameInputEl.value.trim();
 
@@ -15,9 +22,6 @@ function handleAdd(event) {
             if (coinData) {
                 // localStorage.setItem(cryptocurrency, JSON.stringify(cryptoArray))
                 renderCoinToDisplay(coinData);
-
-
-
             }
         })
     }
@@ -26,10 +30,13 @@ function handleAdd(event) {
 function renderCoinToDisplay(coinData) {
     // create element
     var coinCardEl = document.createElement("div");
+    coinCardEl.classList.add("coinCard");
 
     // coinData.name
-    coinCardEl.textContent = coinData.name;
-    coinCardEl.classList.add("coinCard");
+    var coinName = document.createElement("div")
+    coinName.textContent = coinData.name;
+    coinName.classList.add("cardName");
+    coinCardEl.append(coinName);
     
     // coinData.block_time_in_minutes
 
@@ -37,31 +44,42 @@ function renderCoinToDisplay(coinData) {
 
     // coinData.community_data.facebook_likes ; community_data.twitter_followers ; community_data.reddit_average_comments_48h 
     // coinCardEl.textContent = coinData.community_data.twitter_followers;
-    coinCardEl.classList.add("coinCard");
 
     // create social card
     var socialContainer = document.createElement("div");
     var logoEl = document.createElement("img");
 
-    // create logo image
-    logoEl.classList.add("socialLogo");
-    logoEl.src = "https://gist.github.com/mbostock/3094619/raw/78116ff0306b3b5c3f40e6cdd5f6f8f648ecffd1/thumbnail.png"
-    socialContainer.append(logoEl);
 
-    // create twitter followers
-    socialContainer.append(coinData.community_data.twitter_followers + " followers")
     // socialContainer.textContent = coinData.community_data.twitter_followers + " followers";
-    coinCardEl.append(socialContainer);
+        // create twitter logo image
+        logoEl.classList.add("socialLogo");
+        logoEl.src = "./twitter-svgrepo-com.svg"
+        socialContainer.append(logoEl);
+
+        // create twitter followers
+        socialContainer.append(" " + coinData.community_data.twitter_followers + " followers")
+        coinCardEl.append(socialContainer);
 
     // coinData.description.en
 
     // coinData.genesis_date
 
     // coinData.image.large
+    var coinImageEl = document.createElement("img");
+    coinImageEl.classList.add("coinImage");
+    coinImageEl.src = coinData.image.large;
+    coinCardEl.append(coinImageEl);
 
     // coinData.market_data.current_price.usd
+    var marketData = document.createElement("div");
+    marketData.append("Current Market Price: " + formatter.format(coinData.market_data.current_price.usd));
+    coinCardEl.append(marketData);
+
 
     // coinData.market_data.market_cap.usd
+    var marketCap = document.createElement("div");
+    marketCap.append("Current Market Cap: " + formatter.format(coinData.market_data.market_cap.usd));
+    coinCardEl.append(marketCap);
 
     // coinData.market_data.price_change_percentage_30d
 
