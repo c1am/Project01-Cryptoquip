@@ -1,3 +1,10 @@
+:root {
+    --card-padding: 10px;
+    --card-color: blue;
+    --card-background: lightgreen;
+    font-size: 20px;
+}
+
 h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 5em;
@@ -54,6 +61,15 @@ h2 {
     width: 100%;
 }
 
-#createWatchlistBtn {
-    display: none;
+.coinCard {
+    display: inline-block;
+    min-width: 200px;
+    padding: var(--card-padding);
+    color: var(--card-color);
+    background-color: var(--card-background);
+    margin: 10px;
+}
+
+.socialLogo {
+    width: 40px;
 }

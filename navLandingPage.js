@@ -1,4 +1,5 @@
 var addBtnEl = document.getElementById("addBtn")
+var displayEl = document.getElementById("display")
 var nameInputEl = document.getElementById("coinInput")
 var cryptoArray = [];
 
@@ -13,32 +14,61 @@ function handleAdd(event) {
         .then (function(coinData) {
             if (coinData) {
                 // localStorage.setItem(cryptocurrency, JSON.stringify(cryptoArray))
-                console.log(coinData)
-                // coinData.name
-                
-                // coinData.block_time_in_minutes
+                renderCoinToDisplay(coinData);
 
-                // coinData.coingecko_score
-
-                // coinData.community_data.facebook_likes ; community_data.twitter_followers ; community_data.reddit_average_comments_48h 
-
-                // coinData.description.en
-
-                // coinData.genesis_date
-
-                // coinData.image.large
-
-                // coinData.market_data.current_price.usd
-
-                // coinData.market_data.market_cap.usd
-
-                // coinData.market_data.price_change_percentage_30d
 
 
             }
         })
     }
 };
+
+function renderCoinToDisplay(coinData) {
+    // create element
+    var coinCardEl = document.createElement("div");
+
+    // coinData.name
+    coinCardEl.textContent = coinData.name;
+    coinCardEl.classList.add("coinCard");
+    
+    // coinData.block_time_in_minutes
+
+    // coinData.coingecko_score
+
+    // coinData.community_data.facebook_likes ; community_data.twitter_followers ; community_data.reddit_average_comments_48h 
+    // coinCardEl.textContent = coinData.community_data.twitter_followers;
+    coinCardEl.classList.add("coinCard");
+
+    // create social card
+    var socialContainer = document.createElement("div");
+    var logoEl = document.createElement("img");
+
+    // create logo image
+    logoEl.classList.add("socialLogo");
+    logoEl.src = "https://gist.github.com/mbostock/3094619/raw/78116ff0306b3b5c3f40e6cdd5f6f8f648ecffd1/thumbnail.png"
+    socialContainer.append(logoEl);
+
+    // create twitter followers
+    socialContainer.append(coinData.community_data.twitter_followers + " followers")
+    // socialContainer.textContent = coinData.community_data.twitter_followers + " followers";
+    coinCardEl.append(socialContainer);
+
+    // coinData.description.en
+
+    // coinData.genesis_date
+
+    // coinData.image.large
+
+    // coinData.market_data.current_price.usd
+
+    // coinData.market_data.market_cap.usd
+
+    // coinData.market_data.price_change_percentage_30d
+
+    // append to display element
+    displayEl.append(coinCardEl);
+}
+
 
 /* async method of the Add to Watchlist button function
 async function handleAdd(event) {
