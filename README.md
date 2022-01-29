@@ -22,5 +22,5 @@ SSH Clone Link: `git@github.com:c1am/Project01-Cryptoquip.git`
 
 
 ## Acknowledgments
-* Ron Erlih
-* Samuel Thompson
+* Ron
+* Fan
